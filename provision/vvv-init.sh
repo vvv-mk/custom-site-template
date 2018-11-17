@@ -32,8 +32,12 @@ then
 
   echo "Installing Bedrock stack using Composer"
 
-  # TODO: change eval to cd ${VVV_PATH_TO_SITE}/public_html or use mkdir command
-  eval cd .. && composer create-project cdk-comp/bedrock public_html
+  noroot composer create-project cdk-comp/bedrock ${VVV_PATH_TO_SITE}/public_html
+
+  sed -i -e "s/DB_NAME=database_name/DB_NAME=${DB_NAME}/g" "${VVV_PATH_TO_SITE}/public_html/.env"
+  sed -i -e "s/DB_USER=database_user/DB_USER=wp/g" "${VVV_PATH_TO_SITE}/public_html/.env"
+  sed -i -e "s/DB_PASS=database_password/DB_PASS=wp/g" "${VVV_PATH_TO_SITE}/public_html/.env"
+  sed -i -e "s/CDK_HOST=test.test/CDK_HOST=${DOMAIN}/g" "${VVV_PATH_TO_SITE}/public_html/.env"
 fi
 
 cp -f "${VVV_PATH_TO_SITE}/provision/vvv-nginx.conf.tmpl" "${VVV_PATH_TO_SITE}/provision/vvv-nginx.conf"
