@@ -34,9 +34,11 @@ then
 
   noroot composer create-project cdk-comp/bedrock ${VVV_PATH_TO_SITE}/public_html
 
+  echo "Setup .env"
+
   sed -i -e "s/DB_NAME=database_name/DB_NAME=${DB_NAME}/g" "${VVV_PATH_TO_SITE}/public_html/.env"
   sed -i -e "s/DB_USER=database_user/DB_USER=wp/g" "${VVV_PATH_TO_SITE}/public_html/.env"
-  sed -i -e "s/DB_PASS=database_password/DB_PASS=wp/g" "${VVV_PATH_TO_SITE}/public_html/.env"
+  sed -i -e "s/DB_PASSWORD=database_password/DB_PASSWORD=wp/g" "${VVV_PATH_TO_SITE}/public_html/.env"
   sed -i -e "s/CDK_HOST=test.test/CDK_HOST=${DOMAIN}/g" "${VVV_PATH_TO_SITE}/public_html/.env"
 fi
 
